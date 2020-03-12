@@ -3,6 +3,7 @@ import Softmax.data_utils as du
 import argparse
 import numpy as np
 from Softmax.linear_classifier import Softmax
+from Pytorch.Net import Net
 
 #########################################################################
 # TODO:                                                                 #
@@ -19,11 +20,24 @@ def predict_usingPytorch(X):
     # - Do the operation required to get the predictions                    #
     # - Return predictions in a numpy array                                 #
     #########################################################################
-    pass
+    
+    net = Net()
+    checkpoint = torch.load("./Pytorch/model.ckpt")
+    net.load_state_dict(checkpoint)
+    pred = np.empty(0)
+
+    net.eval()
+    with torch.no_grad():
+        for data in valloader:
+            images, labels = data
+            outputs = net(images)
+            _, predicted = torch.max(F.softmax(outputs).data, 1)
+            pred = np.append(pred,predicted.numpy())
+            
     #########################################################################
     #                       END OF YOUR CODE                                #
     #########################################################################
-    return y_pred
+    return pred.astype(int)
 
 def predict_usingSoftmax(X):
     #########################################################################
@@ -32,7 +46,12 @@ def predict_usingSoftmax(X):
     # - Do the operation required to get the predictions                    #
     # - Return predictions in a numpy array                                 #
     #########################################################################
-    pass
+    best_softmax = Softmax()
+    with open('./Softmax/softmax_weights.pkl') as f:
+        best_softmax.W = pickle.load(f)
+        
+    y_pred = best_softmax.predict(X)
+    
     #########################################################################
     #                       END OF YOUR CODE                                #
     #########################################################################

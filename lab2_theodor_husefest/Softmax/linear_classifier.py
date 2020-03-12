@@ -1,14 +1,17 @@
 import numpy as np
-from softmax import *
+from .softmax import *
 
 
 class LinearClassifier(object):
 
   def __init__(self):
     self.W = None
+    
+  def calculate_accuracy():
+    pass
 
   def train(self, X, y, learning_rate=1e-3, num_iters=100,
-            batch_size=200, verbose=False):
+            batch_size=200, verbose=False, reg = 0.0):
     """
     Train this linear classifier using stochastic gradient descent.
 
@@ -33,14 +36,12 @@ class LinearClassifier(object):
       self.W = 0.001 * np.random.randn(dim, num_classes)
 
     num_batches = int(np.floor(X.shape[0]/batch_size))
-    print(num_batches)
+    print('Number of batches: ', num_batches)
     # Run stochastic gradient descent to optimize W
     loss_history = []
     for it in range(num_iters):
-      
+
       for batch in range(num_batches):
-        if batch% 40 == 0:
-            print('Batch', batch)
 
 
       #########################################################################
@@ -65,8 +66,8 @@ class LinearClassifier(object):
       #########################################################################
 
       # evaluate loss and gradient
-        loss, grad = self.loss(X_batch, y_batch) #, reg)
-        loss_history.append(loss)
+        loss, grad = self.loss(X_batch, y_batch,reg)
+        #loss_history.append(loss)
 
       # perform parameter update
       #########################################################################
@@ -77,8 +78,9 @@ class LinearClassifier(object):
       #########################################################################
       #                       END OF YOUR CODE                                #
       #########################################################################
-
-      if verbose: # and it % 100 == 0:
+      
+      loss_history.append(loss)
+      if verbose and it % 20 == 0:
         print('iteration %d / %d: loss %f' % (it, num_iters, loss))
 
     return loss_history
@@ -112,7 +114,7 @@ class LinearClassifier(object):
     ###########################################################################
     return np.argmax(y_pred, axis = 1)
   
-  def loss(self, X_batch, y_batch): #, reg):
+  def loss(self, X_batch, y_batch, reg):
     """
     Compute the loss function and its derivative. 
     Subclasses will override this.
@@ -133,6 +135,6 @@ class LinearClassifier(object):
 class Softmax(LinearClassifier):
   """ A subclass that uses the Softmax + Cross-entropy loss function """
 
-  def loss(self, X_batch, y_batch): #, reg):
-    return softmax_loss_vectorized(self.W, X_batch, y_batch) # , reg)
+  def loss(self, X_batch, y_batch, reg):
+    return softmax_loss_vectorized(self.W, X_batch, y_batch, reg)
 
