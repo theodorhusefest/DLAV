@@ -11,7 +11,7 @@ class LinearClassifier(object):
     pass
 
   def train(self, X, y, learning_rate=1e-3, num_iters=100,
-            batch_size=200, verbose=False, reg = 0.0):
+            batch_size=200, verbose=False, reg = 0.0, X_val=None, y_val=None):
     """
     Train this linear classifier using stochastic gradient descent.
 
@@ -38,7 +38,8 @@ class LinearClassifier(object):
     num_batches = int(np.floor(X.shape[0]/batch_size))
     print('Number of batches: ', num_batches)
     # Run stochastic gradient descent to optimize W
-    loss_history = []
+    train_loss_history = []
+    val_loss_history = []
     for it in range(num_iters):
 
       for batch in range(num_batches):
@@ -66,8 +67,7 @@ class LinearClassifier(object):
       #########################################################################
 
       # evaluate loss and gradient
-        loss, grad = self.loss(X_batch, y_batch,reg)
-        #loss_history.append(loss)
+        _, grad = self.loss(X_batch, y_batch, reg)
 
       # perform parameter update
       #########################################################################
@@ -78,12 +78,18 @@ class LinearClassifier(object):
       #########################################################################
       #                       END OF YOUR CODE                                #
       #########################################################################
-      
-      loss_history.append(loss)
-      if verbose and it % 20 == 0:
-        print('iteration %d / %d: loss %f' % (it, num_iters, loss))
 
-    return loss_history
+      train_loss, _ = self.loss(X, y, reg)
+      train_loss_history.append(train_loss)
+
+      if X_val is not None and y_val is not None:
+        val_loss, _ = self.loss(X_val, y_val, reg=0)
+        val_loss_history.append(val_loss)
+
+      if verbose and it % 5 == 0:
+        print('iteration %03d / %03d: train_loss %.03f / val_loss %.03f' % (it, num_iters, train_loss, val_loss))
+
+    return train_loss_history, val_loss_history
 
   def predict(self, X):
     """
