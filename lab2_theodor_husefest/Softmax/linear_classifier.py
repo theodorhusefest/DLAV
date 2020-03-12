@@ -32,11 +32,16 @@ class LinearClassifier(object):
       # lazily initialize W
       self.W = 0.001 * np.random.randn(dim, num_classes)
 
+    num_batches = int(np.floor(X.shape[0]/batch_size))
+    print(num_batches)
     # Run stochastic gradient descent to optimize W
     loss_history = []
     for it in range(num_iters):
-      X_batch = None
-      y_batch = None
+      
+      for batch in range(num_batches):
+        if batch% 40 == 0:
+            print('Batch', batch)
+
 
       #########################################################################
       # TODO:                                                                 #
@@ -49,26 +54,31 @@ class LinearClassifier(object):
       # Hint: Use np.random.choice to generate indices. Sampling with         #
       # replacement is faster than sampling without replacement.              #
       #########################################################################
-      pass
+      
+        ind = np.random.choice(X.shape[0], batch_size, replace = True)
+        X_batch = X[ind]
+        y_batch = y[ind]
+        
+        
       #########################################################################
       #                       END OF YOUR CODE                                #
       #########################################################################
 
       # evaluate loss and gradient
-      loss, grad = self.loss(X_batch, y_batch, reg)
-      loss_history.append(loss)
+        loss, grad = self.loss(X_batch, y_batch) #, reg)
+        loss_history.append(loss)
 
       # perform parameter update
       #########################################################################
       # TODO:                                                                 #
       # Update the weights using the gradient and the learning rate.          #
       #########################################################################
-      pass
+        self.W -= learning_rate*grad
       #########################################################################
       #                       END OF YOUR CODE                                #
       #########################################################################
 
-      if verbose and it % 100 == 0:
+      if verbose: # and it % 100 == 0:
         print('iteration %d / %d: loss %f' % (it, num_iters, loss))
 
     return loss_history
@@ -87,18 +97,22 @@ class LinearClassifier(object):
       array of length N, and each element is an integer giving the predicted
       class.
     """
-    y_pred = np.zeros(X.shape[0])
+
     ###########################################################################
     # TODO:                                                                   #
     # Implement this method. Store the predicted labels in y_pred.            #
     ###########################################################################
-    pass
+    
+    S = np.matmul(X, self.W)
+    S = np.exp(S)
+    
+    y_pred = S / np.expand_dims(np.sum(S, axis=1), axis=1)
     ###########################################################################
     #                           END OF YOUR CODE                              #
     ###########################################################################
-    return y_pred
+    return np.argmax(y_pred, axis = 1)
   
-  def loss(self, X_batch, y_batch, reg):
+  def loss(self, X_batch, y_batch): #, reg):
     """
     Compute the loss function and its derivative. 
     Subclasses will override this.
@@ -113,12 +127,12 @@ class LinearClassifier(object):
     - loss as a single float
     - gradient with respect to self.W; an array of the same shape as W
     """
-    pass
+    pass 
 
 
 class Softmax(LinearClassifier):
   """ A subclass that uses the Softmax + Cross-entropy loss function """
 
-  def loss(self, X_batch, y_batch, reg):
-    return softmax_loss_vectorized(self.W, X_batch, y_batch, reg)
+  def loss(self, X_batch, y_batch): #, reg):
+    return softmax_loss_vectorized(self.W, X_batch, y_batch) # , reg)
 
