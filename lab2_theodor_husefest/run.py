@@ -47,7 +47,7 @@ def predict_usingSoftmax(X):
     # - Return predictions in a numpy array                                 #
     #########################################################################
     best_softmax = Softmax()
-    with open('./Softmax/softmax_weights.pkl') as f:
+    with open('./Softmax/softmax_weights_acc_0.400.pkl') as f:
         best_softmax.W = pickle.load(f)
         
     y_pred = best_softmax.predict(X)

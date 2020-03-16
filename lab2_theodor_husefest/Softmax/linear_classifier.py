@@ -34,6 +34,8 @@ class LinearClassifier(object):
     if self.W is None:
       # lazily initialize W
       # self.W = 0.001 * np.random.randn(dim, num_classes)
+      
+      # Initialize using normal distribution 
         self.W = np.random.normal(loc=0.0, scale=0.001, size=(dim, num_classes))
 
     num_batches = int(np.floor(X.shape[0]/batch_size))
