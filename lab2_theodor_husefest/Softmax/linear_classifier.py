@@ -33,7 +33,8 @@ class LinearClassifier(object):
     num_classes = np.max(y) + 1 # assume y takes values 0...K-1 where K is number of classes
     if self.W is None:
       # lazily initialize W
-      self.W = 0.001 * np.random.randn(dim, num_classes)
+      # self.W = 0.001 * np.random.randn(dim, num_classes)
+        self.W = np.random.normal(loc=0.0, scale=0.001, size=(dim, num_classes))
 
     num_batches = int(np.floor(X.shape[0]/batch_size))
     print('Number of batches: ', num_batches)
