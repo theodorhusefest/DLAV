@@ -4,6 +4,7 @@ import argparse
 import numpy as np
 from Softmax.linear_classifier import Softmax
 from Pytorch.Net import Net
+import torch
 
 #########################################################################
 # TODO:                                                                 #
@@ -60,6 +61,13 @@ def predict_usingSoftmax(X):
 def main(filename, group_number):
 
     X,Y = du.load_CIFAR_batch(filename)
+
+    ### Modified this part
+    mean_pytorch = np.array([0.4914, 0.4822, 0.4465])
+    std_pytorch = np.array([0.2023, 0.1994, 0.2010])
+    X_pytorch = np.divide(np.subtract(X, mean_pytorch[np.newaxis, np.newaxis, :]), std_pytorch[np.newaxis, np.newaxis, :])
+    prediction_pytorch = predict_usingPytorch(torch.Tensor(np.moveaxis(X_pytorch, -1, 1)))
+
     X = np.reshape(X, (X.shape[0], -1))
     mean_image = np.mean(X, axis = 0)
     X -= mean_image
