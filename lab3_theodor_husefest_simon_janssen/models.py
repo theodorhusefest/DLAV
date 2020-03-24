@@ -110,3 +110,52 @@ class ConvNet_Type2(nn.Module):
     def predict(self, x):
         logits = self.forward(x)
         return F.softmax(logits)
+
+
+class ConvNet_Type3(nn.Module):
+    # Tested with lr = 1e-3, l2_reg = 1e-2
+    def __init__(self, n_input_channels=3, n_output=10):
+        super().__init__()
+
+        ################################################################################
+        # TODO:                                                                        #
+        # Define 2 or more different layers of the neural network                      #
+        ################################################################################
+
+        self.conv1 = nn.Conv2d(in_channels=n_input_channels, out_channels=48, kernel_size=5, padding=2)
+        self.maxpool = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.conv2 = nn.Conv2d(in_channels=48, out_channels=36, kernel_size=3, padding=1)
+        self.fc1 = nn.Linear(in_features=(36 * 8 * 8), out_features=288)
+        self.fc2 = nn.Linear(in_features=288, out_features=n_output)
+
+        ################################################################################
+        #                              END OF YOUR CODE                                #
+        ################################################################################
+
+    def forward(self, x):
+        ################################################################################
+        # TODO:                                                                        #
+        # Set up the forward pass that the input data will go through.                 #
+        # A good activation function betweent the layers is a ReLu function.           #
+        #                                                                              #
+        # Note that the output of the last convolution layer should be flattened       #
+        # before being inputted to the fully connected layer. We can flatten           #
+        # Tensor `x` with `x.view`.                                                    #
+        ################################################################################
+        x = F.relu(self.conv1(x))
+        x = self.maxpool(x)
+        x = F.relu(self.conv2(x))
+        x = self.maxpool(x)
+        x = x.view(-1, 36 * 8 * 8)
+        x = F.relu(self.fc1(x))
+        x = self.fc2(x)
+
+        ################################################################################
+        #                              END OF YOUR CODE                                #
+        ################################################################################
+
+        return x
+
+    def predict(self, x):
+        logits = self.forward(x)
+        return F.softmax(logits)
