@@ -3,7 +3,7 @@ import data_utils as du
 import argparse
 import numpy as np
 import torch
-from models import ConvNet
+from models import ConvNet, ConvNet_Type2
 
 #########################################################################
 # TODO:                                                                 #
@@ -25,8 +25,8 @@ def predict_usingCNN(X):
     #########################################################################
 
     # load network
-    fp_checkpoint = 'model_0.740.ckpt'
-    net = ConvNet()
+    fp_checkpoint = 'best_model.ckpt'
+    net = ConvNet_Type2()
     net.load_state_dict(torch.load(fp_checkpoint))
 
     # init dataloader
