@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from torchvision import datasets, transforms
 from torch.utils.data.sampler import SubsetRandomSampler
 from torch.utils.data import DataLoader
+import json
 
 
 def plot_images(X, labels):
@@ -189,3 +190,18 @@ def plot_gradient_flow(named_parameters):
     plt.xlabel("Layers")
     plt.ylabel("Average Gradient")
     plt.title("Gradient Flow")
+
+
+def read_json(file_path):
+    """Reading json data as dict.
+
+    Args:
+      file_path (str): File path.
+
+    Return:
+      json_dict (dict): Dictionary format of json data.
+
+    """
+    with open(file_path, 'r') as f:
+        json_dict = json.load(f)
+    return json_dict

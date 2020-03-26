@@ -1,0 +1,12 @@
+{
+  "parameters": {
+    "model": "ConvNet_Type2",
+    "epochs": 3,
+    "lr": 1e-3,
+    "lr_decay_rate": 0.1,
+    "lr_decay_patience": 3,
+    "lr_decay_threshold": 1e-2,
+    "l2_reg": 1e-2,
+    "results": "runs"
+  }
+}
