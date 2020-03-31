@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "model": "ConvNet_Type2",
+    "model": "ConvNet_Type4",
     "epochs": 3,
     "lr": 1e-3,
     "lr_decay_rate": 0.1,
