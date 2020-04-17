@@ -5,6 +5,7 @@
 **/.ipynb_checkpoints
 **/__pycache__
 **/data
+**/secret
 
 **/*.vs
 lab3_theodor_husefest_simon_janssen/runs
