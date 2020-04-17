@@ -3,7 +3,7 @@ import data_utils as du
 import argparse
 import numpy as np
 import torch
-from models import ConvNet, ConvNet_Type2
+from models import ConvNet, ConvNet_Type4
 
 #########################################################################
 # TODO:                                                                 #
@@ -26,8 +26,8 @@ def predict_usingCNN(X):
 
     # load network
     fp_checkpoint = 'best_model.ckpt'
-    net = ConvNet_Type2()
-    net.load_state_dict(torch.load(fp_checkpoint))
+    net = ConvNet_Type4()
+    net.load_state_dict(torch.load(fp_checkpoint, map_location=torch.device('cpu')))
 
     # init dataloader
     x = torch.from_numpy(X).float()
