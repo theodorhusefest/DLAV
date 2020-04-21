@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gke-training-pod
+spec:
+  containers:
+  - name: my-custom-container
+    image: gcr.io/ml-engine-theo/pytorch_custom_container
+    resources:
+      limits:
+        nvidia.com/gpu: 1
