@@ -6,7 +6,7 @@ Explanations for working remotely through SSH.
 
 Connect to SSH via shell:
 
-    ssh your_name@3.15.217.164 -p 2211
+    ssh your_name@18.221.229.145 -p 2211
     
 Copy files via Secure Copy (scp):
 
@@ -29,7 +29,7 @@ Tap on "Site Manager" (icon top left),
 tap "New Site", for "Protocol" choose "SSH" 
 and enter the following details:
 
-    Host: 3.15.217.164
+    Host: 18.221.229.145
     Port: 2211
     Logon Type: Normal
     User: your_name
@@ -44,25 +44,25 @@ Good explanation here:
 
 ## tmux
 
-Why use: close SSH terminals while keeping tasks (e.g. training alive).
+Why use: close SSH terminals while keeping tasks (e.g. training) alive.
 
 First, connect through SSH via terminal.
 
-###Check tmux sessions currently running
+### Check tmux sessions currently running
 
     tmux ls
     
-###Create new tmux session
+### Create new tmux session
 
     tmux new -s name_of_your_session
     
 After that you are in a new tmux session.
 
-###Enter existing tmux session
+### Enter existing tmux session
 
     tmux a -t name_of_your_session
 
-##Leave session
+## Leave session
 
 Press key combination
 
@@ -74,7 +74,7 @@ Then press
     
 You can then close your SSH connection.
 
-###Delete a session
+### Delete a session
 
     tmux kill-session -t name_of_your_session
     
