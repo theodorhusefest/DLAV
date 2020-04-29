@@ -1,0 +1,3 @@
+[submodule "project/PyTorch-YOLOv3"]
+	path = project/PyTorch-YOLOv3
+	url = git@github.com:kminoda/PyTorch-YOLOv3.git
