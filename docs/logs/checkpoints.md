@@ -49,6 +49,16 @@
 * any issues during training: Nothing
 * good/bad results: About 0.10 mAP. Apparently, not much difference from 01 model.
 
+### 03: Fully trained model by Koji@18/05/20
+* filename: YOLOv3_300420.pth
+* hyper parameters used: default
+* data set (splits) used: all train data in ECP/day & ECP/night
+* epochs on training: 70 epochs
+* previous checkpoints used: None
+* based on git commit: -- 
+* any issues during training: Nothing
+* good/bad results: About 0.10 mAP.
+
 ## PEDESTRON
 
 ### -- Add your checkpoint name here, e.g. "01" --
