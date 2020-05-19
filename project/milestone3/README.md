@@ -1,3 +1,6 @@
 # Description for Milestone 3
 
-### How to run
+### Execute Object Detection
+Just run the following command.
+$ source exec_yolo.sh
+NOTE: Change the first three lines for your configuration.

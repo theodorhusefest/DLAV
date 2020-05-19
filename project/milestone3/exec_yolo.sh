@@ -1,8 +1,9 @@
-video_path=/home/minoda/hoge.mp4
+# Change these three variables for your configuration
+video_path=/home/minoda/koji_hdd/datasets/DLAV_videos/MOT16-10-raw.webm
 save_folder=/home/minoda/git/DLAV/project/milestone3/images
 out_folder=/home/minoda/git/DLAV/project/milestone3/yolov3_outputs
 
-ffmpeg -i ${video_path} -r 20 ${save_folder}/img_%04d.png
+python3 extract_images_from_video.py ${video_path} ${save_folder}
 
 python3 ../PyTorch-YOLOv3/generate_person_images.py \
         --image_folder ${save_folder} \
