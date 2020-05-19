@@ -1,3 +1,6 @@
 [submodule "project/PyTorch-YOLOv3"]
 	path = project/PyTorch-YOLOv3
 	url = git@github.com:kminoda/PyTorch-YOLOv3.git
+[submodule "project/ABD-Net"]
+	path = project/ABD-Net
+	url = https://github.com/theodorhusefest/ABD-Net.git
