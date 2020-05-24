@@ -132,21 +132,21 @@ if __name__ == "__main__":
     """ example use """
 
     # set paths to zip files
-    path_zip_images = 'datasets/ECP_night_img_val.zip'
-    path_zip_labels = 'datasets/ECP_night_labels_val.zip'
+    path_zip_images = '/home/minoda/datasets/ECP/ECP_day_img_train.zip'
+    path_zip_labels = '/home/minoda/datasets/ECP/ECP_day_labels_train.zip'
 
     # get dataset object
     ecpDataset = EcpDataset(path_zip_images, path_zip_labels)
 
     # plot sample image
-    id = 123
-    fig = plt.figure()
-    ax = plt.subplot(1, 1, 1)
-    plt.tight_layout()
-    ax.set_title('Sample %03d' % id)
-    ax.axis('off')
-    show_box2d(ecpDataset[id])
-    plt.show()
+    # id = 123
+    # fig = plt.figure()
+    # ax = plt.subplot(1, 1, 1)
+    # plt.tight_layout()
+    # ax.set_title('Sample %03d' % id)
+    # ax.axis('off')
+    # show_box2d(ecpDataset[id])
+    # plt.show()
 
     # apply transformations
     ecpDataset_transformed = EcpDataset(path_zip_images, path_zip_labels, transform=ToTarget())

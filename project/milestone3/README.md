@@ -3,6 +3,6 @@
 ### Execute Object Detection
 Just run the following command.  
 ```
-$ source exec_yolo.sh  
+$ source milestone3.sh  /path/to/video  
 ```
-NOTE: Change the first three lines for your configuration.
+NOTE: Intermediate files (images of video, pedestrians, and csv information for detected pedestrians)
