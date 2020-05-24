@@ -5,4 +5,5 @@ Just run the following command.
 ```
 $ source milestone3.sh  /path/to/video  
 ```
-NOTE: Change the first three lines for your configuration.
+NOTE1: Change the first three lines for your configuration.
+NOTE2: Weights for YOLOv3 (and ABDNet?) can be downloaded from GoogleDrive
