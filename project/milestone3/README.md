@@ -1,6 +1,6 @@
 # Description for Milestone 3
 
-### Execute Object Detection
+### How to generate video from original video
 Just run the following command.  
 ```
 $ source milestone3.sh  /path/to/video  
