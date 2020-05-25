@@ -8,7 +8,6 @@ if __name__ == "__main__":
     parser.add_argument("video", type=str, help="specify video")
     parser.add_argument("outputs_folder", type=str, help="output folder for images")
     opt = parser.parse_args()
-    print(opt)
 
     cap = cv2.VideoCapture(opt.video)
     cnt = 0
