@@ -3,7 +3,7 @@ video_path=$1 # /home/minoda/koji_hdd/datasets/DLAV_videos/MOT16-10-raw.webm
 save_folder=./intermediates/images
 pedestrians_folder=./intermediates/yolov3_outputs
 path_to_weight_YOLOv3=../PyTorch-YOLOv3/weights/yolov3_300420.pth
-path_to_weight_ABDNet=/path/to/ABDNet/weight
+path_to_weight_ABDNet=../ABD-Net/checkpoints/final_model.zip.tar
 
 rm -rf ${save_folder}
 rm -rf ${pedestrians_folder}
@@ -22,6 +22,13 @@ python3 ../PyTorch-YOLOv3/generate_person_images.py \
 
 # Perform re-ID
 # python ABDNet/inference.py
+
+python3 classify.py -t pedestrianreid -s not_used \
+        --load-weights=${path_to_weight_ABDNet} \
+        --root=data/milestone3 \
+        --video=video_1 \
+        --save-dir=output
+
 
 # Generate deliberative
 python3 ./utils/generate_video.py \
