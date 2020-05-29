@@ -6,6 +6,10 @@
 **/__pycache__
 **/data
 **/secret
+**/videos
+**/video_1
+**/video_2
+**/video_3
 
 **/*.vs
 lab3_theodor_husefest_simon_janssen/runs
